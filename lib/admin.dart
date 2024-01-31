@@ -15,9 +15,19 @@ class Teacher extends StatefulWidget {
   State<Teacher> createState() => _TeacherState();
 }
 
-class _TeacherState extends State<Teacher> {
-  final CollectionReference _pegawai = FirebaseFirestore.instance.collection("users").doc();
-  final Query _karyawan = _pegawai.where("rool", isEqualTo: "karyawan");
+class fromDatabase {
+  late CollectionReference _pegawai;
+  late Query _karyawan;
+
+  fromDatabase() {
+    _pegawai = FirebaseFirestore.instance.collection("users");
+    _karyawan = _pegawai.where("rool", isEqualTo: "karyawan");
+  }
+}
+
+
+class _TeacherState extends State<Teacher>, fromDatabase {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -127,4 +137,5 @@ class _TeacherState extends State<Teacher> {
       ),
     );
   }
+
 }
