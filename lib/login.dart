@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'Model/modelpegawai.dart';
+import 'package:flutter/services.dart';
 
 import 'admin.dart';
 import 'karyawan.dart';
@@ -28,9 +29,9 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           children: <Widget>[
             Container(
-              color: Colors.orangeAccent[700],
+              color: Color.fromARGB(255, 97, 159, 240),
               width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 0.70,
+              height: MediaQuery.of(context).size.height * 1.0,
               child: Center(
                 child: Container(
                   margin: EdgeInsets.all(12),
@@ -44,13 +45,15 @@ class _LoginPageState extends State<LoginPage> {
                           height: 30,
                         ),
                         Text(
-                          "Login",
+                          "AGUNG MOTOR",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                             fontSize: 40,
                           ),
                         ),
+                        Image(
+                          image: AssetImage('images/logo yamaha.png')),
                         SizedBox(
                           height: 20,
                         ),
@@ -193,7 +196,7 @@ class _LoginPageState extends State<LoginPage> {
             .then((DocumentSnapshot documentSnapshot) {
       if (documentSnapshot.exists) {
         if (documentSnapshot.get('rool') == "admin") {
-           Navigator.pushReplacement(
+        Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: (context) =>  Teacher(),

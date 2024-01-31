@@ -5,6 +5,9 @@ class UserModel {
   final double? gajipokok;
   final double? uangmakan;
   final int? izin;
+  final String? rool;
+  final String? email;
+  final String? password;
 
   const UserModel({
     this.id,
@@ -12,16 +15,24 @@ class UserModel {
     required this.posisi,
     required this.gajipokok,
     required this.uangmakan,
-    required this.izin
+    required this.izin,
+    required this.rool,
+    this.email,
+    this.password
   });
 
   toJson(){
     return{
-      "Nama": nama,
-      "Posisi": posisi,
-      "Gaji Pokok": gajipokok,
-      "Uang Makan": uangmakan,
-      "Izin": izin,
+      "nama": nama,
+      "posisi": posisi,
+      "gajipokok": gajipokok,
+      "uangmakan": uangmakan,
+      "izin": izin,
+      "rool": "karyawan"
     };
+  }
+
+  Map<String,dynamic> add_data(){
+    return {"nama": nama, "posisi": posisi, "gajipokok": gajipokok, "uangmakan": uangmakan, "izin": izin, "rool": "karyawan"};
   }
 }
