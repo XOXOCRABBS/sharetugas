@@ -7,6 +7,9 @@ import 'package:projectuas/View/editpegawai.dart';
 import 'login.dart';
 import 'package:projectuas/Model/modelpegawai.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'dart:developer';
+import 'package:logger/logger.dart';
+
 
 class Teacher extends StatefulWidget {
   const Teacher({super.key});
@@ -15,18 +18,17 @@ class Teacher extends StatefulWidget {
   State<Teacher> createState() => _TeacherState();
 }
 
-class fromDatabase {
+class _TeacherState extends State<Teacher> {
+
   late CollectionReference _pegawai;
   late Query _karyawan;
+  final Logger logger = Logger();
 
-  fromDatabase() {
+  void initState() {
+    super.initState();
     _pegawai = FirebaseFirestore.instance.collection("users");
     _karyawan = _pegawai.where("rool", isEqualTo: "karyawan");
   }
-}
-
-
-class _TeacherState extends State<Teacher>, fromDatabase {
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +52,7 @@ class _TeacherState extends State<Teacher>, fromDatabase {
             Container(
               height: 500,
               child: StreamBuilder(
-                stream: _pegawai.snapshots(),
+                stream: _karyawan.snapshots(),
                 builder: (context, AsyncSnapshot snapshots) {
                   if(snapshots.connectionState == ConnectionState.waiting) {
                     return Center(
@@ -67,17 +69,17 @@ class _TeacherState extends State<Teacher>, fromDatabase {
                           child: Slidable(
                             startActionPane: ActionPane(
                               motion: StretchMotion(),
-                              children: [
+                              children: [ 
                                 SlidableAction(
                                   onPressed: (context) {
                                     final pgw = UserModel(
                                       id: records.id,
                                       nama: records["nama"],
-                                      posisi: records["gajipokok"],
+                                      posisi: records["posisi"],
                                       gajipokok: records["gajipokok"],
                                       uangmakan: records["uangmakan"],
                                       izin: records["izin"],
-                                      rool: records["rool"]
+                                      rool: records["rool"],
                                     );
                                     Navigator.push(
                                       context, MaterialPageRoute(

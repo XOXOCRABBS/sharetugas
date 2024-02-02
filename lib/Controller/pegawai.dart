@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:projectuas/Model/modelpegawai.dart';
 
-final CollectionReference _pegawai = FirebaseFirestore.instance.collection("Users");
+final CollectionReference _pegawai = FirebaseFirestore.instance.collection("users");
 
 class Pegawai {
     //add data
@@ -15,7 +15,7 @@ class Pegawai {
   }
 
   //detele data
-  Future hapus_pegawai(UserModel model_mahasiswa) async {
-    await _pegawai.doc(model_mahasiswa.id).delete();
+  Future hapus_pegawai(UserModel mpgw) async {
+    await _pegawai.doc(mpgw.id).delete();
   }
 }

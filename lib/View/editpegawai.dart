@@ -1,5 +1,7 @@
 import 'dart:ffi';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:projectuas/Component/mytextfield.dart';
 import 'package:projectuas/Controller/pegawai.dart';
 import 'package:projectuas/Model/modelpegawai.dart';
@@ -34,9 +36,9 @@ class _ManagepgwState extends State<Managepgw> {
       id.text = widget.mpegawai!.id!;  
       nama.text = widget.mpegawai!.nama!;
       posisi.text = widget.mpegawai!.posisi!;
-      gajipokok.text = widget.mpegawai!.gajipokok as String;
-      uangmakan.text = widget.mpegawai!.uangmakan as String;
-      izin.text = widget.mpegawai?.izin as String;
+      gajipokok.text = widget.mpegawai!.gajipokok.toString();
+      uangmakan.text = widget.mpegawai!.uangmakan.toString();
+      izin.text = widget.mpegawai!.izin.toString();
     }else {
       iseditingmode = false;
     }
@@ -45,6 +47,7 @@ class _ManagepgwState extends State<Managepgw> {
 
   @override
   Widget build(BuildContext context){
+
     return Scaffold(
       appBar: AppBar(
         title: iseditingmode == true ? Text("Edit Pegawai") : Text("Tambah Pegawai"),
@@ -81,7 +84,8 @@ class _ManagepgwState extends State<Managepgw> {
                       _form_key.currentState!.save();
 
                       if(iseditingmode == true){
-                        Pegawai().update_pegawai(UserModel(id: id.text, nama: nama.text, posisi: posisi.text, gajipokok: double.tryParse(gajipokok.text), uangmakan: double.tryParse(uangmakan.text), izin: int.tryParse(izin.text), rool: "karyawan"));
+                        debugPrint('halo');
+                        Pegawai().update_pegawai(UserModel(id: id.text, nama: nama.text, posisi: posisi.text, gajipokok: int.tryParse(gajipokok.text), uangmakan: int.tryParse(uangmakan.text), izin: int.tryParse(izin.text), rool: "karyawan"));
                       }
                     }
                     Navigator.pop(context);

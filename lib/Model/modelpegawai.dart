@@ -2,8 +2,8 @@ class UserModel {
   final String? id;
   final String? nama;
   final String? posisi;
-  final double? gajipokok;
-  final double? uangmakan;
+  final int? gajipokok;
+  final int? uangmakan;
   final int? izin;
   final String? rool;
   final String? email;
